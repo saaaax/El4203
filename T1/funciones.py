@@ -1,5 +1,4 @@
 #Primero hacemos las funciones por si solas para comprobar que funcionan antes de pasarlas a una clase
-
 def caminos_iterativo(n, m):
     #Matriz que almacena caminos
     matriz = [[0] * m for _ in range(n)]
