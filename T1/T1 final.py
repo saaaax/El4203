@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 from math import comb
 
 
-
 def tiempo_decorador(func):
     def medir_tiempo(*args):
         #como sólo queremos comparar los tiempos, simplificaremos el problema a un cuadrado
