@@ -1,4 +1,3 @@
-
 import time
 import matplotlib.pyplot as plt
 from math import comb
@@ -35,8 +34,8 @@ class PCB:
         else:
             return self.caminos_recursivo(n - 1, m) + self.caminos_recursivo(n, m - 1)
         
-    # def caminos_comb(self, n, m):
-    #     return comb(n + m - 2, n - 1)
+    def caminos_comb(self, n, m):
+        return comb(n + m - 2, n - 1)
     
     #Agregamos el metodo para calcular el tiempo
     def medir_tiempo(self, metodo, n):
@@ -44,49 +43,57 @@ class PCB:
         #tomamos el tiempo de partida
         inicio = time.time()
         #vector para los tiempos
-        v_tiempo =[]
-        #recorremos los n y m
+        v_tiempo =[0]
+        #recorremos los n
         for i in range(1, n):
             #usamos el método para ver cuanto tarda
             metodo( i, i)
             fin = time.time()
-            print(fin, inicio)
+            #lo guardamos en el vector
             v_tiempo.append(fin - inicio)
         return v_tiempo
         
-# n=3
-# m=3
+n=3
+m=3
 caminos = PCB()
-# a = caminos.caminos_iterativo(n,m)
-# b= caminos.caminos_recursivo(n,m)
-# c= caminos.caminos_comb(n,m)
-#print(a,b) #se ve bien
-#probamos el metodo para medir tiempo
-t_iterativo = caminos.medir_tiempo(caminos.caminos_iterativo, 20)
-#t_recursivo = caminos.medir_tiempo(caminos.caminos_recursivo, 15)
-# t_combinatoria = caminos.medir_tiempo(caminos.caminos_comb, 10)
+a = caminos.caminos_iterativo(n,m)
+b= caminos.caminos_recursivo(n,m)
+c= caminos.caminos_comb(n,m)
+print(a,b,c) #se ve bien
 
-x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+largo=15
+
+#probamos el metodo para medir tiempo
+t_iterativo = caminos.medir_tiempo(caminos.caminos_iterativo, largo)
+t_recursivo = caminos.medir_tiempo(caminos.caminos_recursivo, largo)
+t_combinatoria = caminos.medir_tiempo(caminos.caminos_comb, largo)
+
+
 
 plt.plot(t_iterativo, label="método iterativo")
-plt.ylim(-0.1, 0.1)
+#restringimos el 0
+plt.xlim(1, largo)
 plt.title("método iterativo")
 plt.xlabel("Ancho de la PCB")
 plt.ylabel("Tiempo de ejecución en segundos")
 plt.savefig("Tiempo con iteración.png")
 plt.show()
-print(t_iterativo)
-# plt.plot(t_recursivo, 'o-', label="método recursivo")
-# plt.title("método recursivo")
-# plt.xlabel("Ancho de la PCB")
-# plt.ylabel("Tiempo de ejecución en segundos")
-# plt.savefig("Tiempo con recursión.png")
-# plt.show()
+
+plt.plot(t_recursivo, label="método recursivo")
+#restringimos el 0
+plt.xlim(1, largo)
+plt.title("método recursivo")
+plt.xlabel("Ancho de la PCB")
+plt.ylabel("Tiempo de ejecución en segundos")
+plt.savefig("Tiempo con recursión.png")
+plt.show()
 
 
-# plt.plot(t_combinatoria, 'o-', label="método recursivo")
-# plt.title("método combinatoria")
-# plt.xlabel("Ancho de la PCB")
-# plt.ylabel("Tiempo de ejecución en segundos")
-# plt.savefig("Tiempo con combinatoria.png")
-# plt.show()
+plt.plot(t_combinatoria, label="método recursivo")
+#restringimos el 0
+plt.xlim(1, largo)
+plt.title("método combinatoria")
+plt.xlabel("Ancho de la PCB")
+plt.ylabel("Tiempo de ejecución en segundos")
+plt.savefig("Tiempo con combinatoria.png")
+plt.show()
